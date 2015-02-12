@@ -32,8 +32,10 @@ def removeNans(t,y):
             ytemp.append( yCurrent )
     return ( array(ttemp),array(ytemp) )
 
-def fitFunc12(t,k,t0,n):
+def fitPoly(t,k,t0,n):
     return k*((t+t0)**n)
+def fitExpo(t,c1,c2):
+    return exp( c1+(c2*t) )
 
 def debugY(t,y):
     f = open('debug.txt','w')
@@ -207,29 +209,30 @@ t6,y6 = removeNans(timeall,y6all)
 # fitting to function k(t+t0)^n, parameters are [k,t0,n]
 
 p0 = [1,9.7,0.66]
-popt1,pcov1 = curve_fit(fitFunc12,t1,y1,p0)
+popt1,pcov1 = curve_fit(fitPoly,t1,y1,p0)
 print popt1
 print pcov1
 
 
 p0 = [0.5,9.7,0.5]
-popt2,pcov2 = curve_fit(fitFunc12,t2,y2,p0)
+popt2,pcov2 = curve_fit(fitPoly,t2,y2,p0)
 print popt2
 print pcov2
 
 # parameters from a ROOT fit
 p0 = [0.0747717,13.708127540232468,1.]
 # p0 = [0.1,9.7,1.]
-popt3,pcov3 = curve_fit(fitFunc12,t3,y3,p0)
+popt3,pcov3 = curve_fit(fitPoly,t3,y3,p0)
 print popt3
 print pcov3
 
-# debugY(t4,y4)
-# p0 = [0.1,9.7,1.]
-# popt4,pcov4 = curve_fit(fitFunc12,t4,y4,p0)
-# print popt4
-# print pcov4
+# fit for this func is exp( c1+(c2*t) )
+p0 = [0.0618829,0.0598859]
+popt4,pcov4 = curve_fit(fitExpo,t4,y4,p0)
+print popt4
+print pcov4
 
+# debugY(t5,y5)
 
 # figure()
 # plot(timeall,y1all)
