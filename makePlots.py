@@ -36,11 +36,11 @@ def fitFunc12(t,k,t0,n):
     return k*((t+t0)**n)
 
 def debugY(t,y):
-    # f = open('debug.txt','w')
-    # for i in range( len(t) ):
-    #     s = str(t[i]) + " " + str(y[i]) + "\n"
-    #     f.write(s)
-    # f.close()
+    f = open('debug.txt','w')
+    for i in range( len(t) ):
+        s = str(t[i]) + " " + str(y[i]) + "\n"
+        f.write(s)
+    f.close()
     figure()
     plot(t,y)
     show()
@@ -204,6 +204,8 @@ t6,y6 = removeNans(timeall,y6all)
 #         print "nan!"
 
 # now have timeall and yiall for i in [1,6].  Use these for the fitting!
+# fitting to function k(t+t0)^n, parameters are [k,t0,n]
+
 p0 = [1,9.7,0.66]
 popt1,pcov1 = curve_fit(fitFunc12,t1,y1,p0)
 print popt1
@@ -215,11 +217,18 @@ popt2,pcov2 = curve_fit(fitFunc12,t2,y2,p0)
 print popt2
 print pcov2
 
-# debugY(t3,y3)
+# parameters from a ROOT fit
+p0 = [0.0747717,13.708127540232468,1.]
 # p0 = [0.1,9.7,1.]
-# popt3,pcov3 = curve_fit(fitFunc12,t3,y3,p0)
-# print popt3
-# print pcov3
+popt3,pcov3 = curve_fit(fitFunc12,t3,y3,p0)
+print popt3
+print pcov3
+
+# debugY(t4,y4)
+# p0 = [0.1,9.7,1.]
+# popt4,pcov4 = curve_fit(fitFunc12,t4,y4,p0)
+# print popt4
+# print pcov4
 
 
 # figure()
