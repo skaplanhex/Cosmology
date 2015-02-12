@@ -233,6 +233,10 @@ print popt4
 print pcov4
 
 # debugY(t5,y5)
+p0 = [1.,19.,0.7]
+popt5,pcov5 = curve_fit(fitPoly,t5,y5,p0)
+print popt5
+print pcov5
 
 # figure()
 # plot(timeall,y1all)
