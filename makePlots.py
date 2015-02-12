@@ -45,6 +45,8 @@ def debugY(t,y):
     f.close()
     figure()
     plot(t,y)
+    semilogy()
+    # loglog()
     show()
 
 # first, run backward in time.
@@ -88,7 +90,7 @@ y4past = odeint(deriv,yinit,time)
 
 omega_m0 = 0.3
 omega_r0 = 0.
-omega_de0 = 0.
+omega_de0 = 0.7
 k = 0.
 w = -2./3.
 
@@ -96,7 +98,7 @@ y5past = odeint(deriv,yinit,time)
 
 omega_m0 = 0.3
 omega_r0 = 0.
-omega_de0 = 0.
+omega_de0 = 0.7
 k = 0.
 w = -4./3.
 
@@ -143,7 +145,7 @@ y4future = odeint(deriv,yinit,timefuture)
 
 omega_m0 = 0.3
 omega_r0 = 0.
-omega_de0 = 0.
+omega_de0 = 0.7
 k = 0.
 w = -2./3.
 
@@ -151,7 +153,7 @@ y5future = odeint(deriv,yinit,timefuture)
 
 omega_m0 = 0.3
 omega_r0 = 0.
-omega_de0 = 0.
+omega_de0 = 0.7
 k = 0.
 w = -4./3.
 
@@ -232,11 +234,17 @@ popt4,pcov4 = curve_fit(fitExpo,t4,y4,p0)
 print popt4
 print pcov4
 
-# debugY(t5,y5)
-p0 = [1.,19.,0.7]
+p0 = [1.,17.,1.5]
 popt5,pcov5 = curve_fit(fitPoly,t5,y5,p0)
 print popt5
 print pcov5
+
+debugY(t6,y6)
+
+# p0 = [1.,19.,0.7]
+# popt6,pcov6 = curve_fit(fitPoly,t6,y6,p0)
+# print popt6
+# print pcov6
 
 # figure()
 # plot(timeall,y1all)
