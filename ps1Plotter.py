@@ -11,6 +11,7 @@ f3 = open('a3.txt','r')
 f4 = open('a4.txt','r')
 f5 = open('a5.txt','r')
 f6 = open('a6.txt','r')
+f6h = open('a6h.txt','r')
 
 t1 = []
 a1 = []
@@ -39,6 +40,7 @@ aDotFromFit5 = []
 
 t6 = []
 a6 = []
+tFromFit6 = [] #special case because 6 was impossible for me to fit
 aFromFit6 = []
 aDotFromFit6 = []
 
@@ -114,6 +116,18 @@ f6.close()
 t6 = np.array(t6)
 a6 = np.array(a6)
 
+for line in f6h:
+    s = line.split()
+    if s[0] == "0.0":
+        continue
+    tFromFit6.append( float(s[0]) )
+    aFromFit6.append( float(s[1]) )
+    aDotFromFit6.append( float(s[2]) )
+f6h.close()
+tFromFit6 = np.array(tFromFit6)
+aFromFit6 = np.array(aFromFit6)
+aDotFromFit6 = np.array(aDotFromFit6)
+
 a1plot = TGraph(len(t1),t1,a1)
 a2plot = TGraph(len(t2),t2,a2)
 a3plot = TGraph(len(t3),t3,a3)
@@ -165,12 +179,14 @@ h2plot = TGraph( len(t2),t2,(aDotFromFit2/aFromFit2) )
 h3plot = TGraph( len(t3),t3,(aDotFromFit3/aFromFit3) )
 h4plot = TGraph( len(t4),t4,(aDotFromFit4/aFromFit4) )
 h5plot = TGraph( len(t5),t5,(aDotFromFit5/aFromFit5) )
+h6plot = TGraph( len(tFromFit6),tFromFit6,(aDotFromFit6/aFromFit6) )
 
 h1plot.SetLineColor(kRed+1)
 h2plot.SetLineColor(kBlue)
 h3plot.SetLineColor(kGreen+2)
 h4plot.SetLineColor(kBlack)
 h5plot.SetLineColor(kMagenta)
+h6plot.SetLineColor(kOrange+2)
 h1plot.GetXaxis().SetRangeUser(-15,35)
 h1plot.GetXaxis().SetTitle("t relative to today (Gyr)")
 h1plot.GetYaxis().SetTitle("H (Gyr^{-1})")
@@ -181,6 +197,7 @@ h2plot.Draw("L")
 h3plot.Draw("L")
 h4plot.Draw("L")
 h5plot.Draw("L")
+h6plot.Draw("L")
 
 leg = TLegend(.58,.64,.78,.77)
 leg.SetBorderSize(0)
@@ -193,9 +210,10 @@ leg.AddEntry(h2plot,"Closed","L")
 leg.AddEntry(h3plot,"Open","L")
 leg.AddEntry(h4plot,"#Lambda_{CDM}","L")
 leg.AddEntry(h5plot,"Quintessence","L")
+leg.AddEntry(h6plot,"Phantom Energy","L")
 leg.Draw()
 c.SetLogy()
-c.SaveAs("ps1_plots/h1-5.pdf")
+c.SaveAs("ps1_plots/h1-6.pdf")
 
 c.Clear()
 a6plot = TGraph(len(t6),t6,a6)

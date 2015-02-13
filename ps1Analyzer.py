@@ -56,6 +56,34 @@ def printParams(paramList):
     print "k = %s\nt0 = %s\nn = %s"%( str(paramList[0]),str(paramList[1]),str(paramList[2]) )
     print ""
 
+def analyze6(t,a):
+    tnew=[]
+    anew=[]
+    adotnew=[]
+    print len(t)
+    for i in range( len(t) ):
+        currentT = t[i]
+        currentA = a[i]
+        print i,currentT,currentA
+        if i == 468: # stop at this entry
+            break
+        else:
+            nextT = t[i+1]
+            nextA = a[i+1]
+            slope = (nextA - currentA)/(nextT - currentT)
+            yint = currentA - slope*currentT
+            tempT = (nextT + currentT)/2.
+            tempA = slope*tempT + yint
+            tnew.append(tempT)
+            anew.append(tempA)
+            adotnew.append(slope)
+    tnew = array(tnew)
+    anew = array(anew)
+    adotnew = array(adotnew)
+    return (tnew,anew,adotnew)
+
+
+
 # first, run backward in time.
 
 time = linspace(0,-100,1000)
@@ -252,6 +280,7 @@ f3 = open('a3.txt','w')
 f4 = open('a4.txt','w')
 f5 = open('a5.txt','w')
 f6 = open('a6.txt','w')
+f6h = open('a6h.txt','w')
 
 
 k=popt1[0]
@@ -314,6 +343,16 @@ for i in range( len(t6) ):
     f6.write(s)
 f6.close()
 
+# do hubble stuff for phantom energy case
+
+t6new,y6new,y6dotnew = analyze6(t6,y6)
+for i in range( len(t6new) ):
+    currentT = t6new[i]
+    currentA = y6new[i]
+    currentADot = y6dotnew[i]
+    s = str( currentT ) + " " + str( currentA ) + " " + str( currentADot ) + "\n"
+    f6h.write(s)
+f6h.close()
 print "Done analyzing."
 
 
