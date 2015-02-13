@@ -34,8 +34,12 @@ def removeNans(t,y):
 
 def fitPoly(t,k,t0,n):
     return k*((t+t0)**n)
+def fitPolyDeriv(t,k,t0,n):
+    return k*n*( (t+t0)**(n-1.) )
 def fitExpo(t,c1,c2):
     return exp( c1+(c2*t) )
+def fitExpoDeriv(t,c1,c2):
+    return c2*exp( c1+(c2*t) )
 
 def debugY(t,y):
     f = open('debug.txt','w')
@@ -203,11 +207,9 @@ t4,y4 = removeNans(timeall,y4all)
 t5,y5 = removeNans(timeall,y5all)
 t6,y6 = removeNans(timeall,y6all)
 
-# for i in range(len(t1)):
-#     if math.isnan(y1[i]) or math.isnan(t1[i]):
-#         print "nan!"
-
 # now have timeall and yiall for i in [1,6].  Use these for the fitting!
+
+print "Now fitting the plots!"
 # fitting to function k(t+t0)^n, parameters are [k,t0,n]
 
 p0 = [1,9.7,0.66]
@@ -245,6 +247,80 @@ debugY(t6,y6)
 # popt6,pcov6 = curve_fit(fitPoly,t6,y6,p0)
 # print popt6
 # print pcov6
+
+# write out the a data to text files to be plotted
+print "Now writing out text files!"
+
+f1 = open('a1.txt','w')
+f2 = open('a2.txt','w')
+f3 = open('a3.txt','w')
+f4 = open('a4.txt','w')
+f5 = open('a5.txt','w')
+f6 = open('a6.txt','w')
+
+
+k=popt1[0]
+t0=popt1[1]
+n=popt1[2]
+for i in range( len(t1) ):
+    currentT = t1[i]
+    aFromFit = fitPoly(currentT,k,t0,n)
+    aDotFromFit = fitPolyDeriv(currentT,k,t0,n)
+    s = str( currentT ) + " " + str( y1[i] ) + " " + str( aFromFit ) + " " + str( aDotFromFit ) + "\n"
+    f1.write(s)
+f1.close()
+
+k=popt2[0]
+t0=popt2[1]
+n=popt2[2]
+for i in range( len(t2) ):
+    currentT = t2[i]
+    aFromFit = fitPoly(currentT,k,t0,n)
+    aDotFromFit = fitPolyDeriv(currentT,k,t0,n)
+    s = str( currentT ) + " " + str( y2[i] ) + " " + str( aFromFit ) + " " + str( aDotFromFit ) + "\n"
+    f2.write(s)
+f2.close()
+
+k=popt3[0]
+t0=popt3[1]
+n=popt3[2]
+for i in range( len(t3) ):
+    currentT = t3[i]
+    aFromFit = fitPoly(currentT,k,t0,n)
+    aDotFromFit = fitPolyDeriv(currentT,k,t0,n)
+    s = str( t3[i] ) + " " + str( y3[i] ) + " " + str( aFromFit ) + " " + str( aDotFromFit ) + "\n"
+    f3.write(s)
+f3.close()
+
+c1 = popt4[0]
+c2 = popt4[1]
+for i in range( len(t4) ):
+    currentT = t4[i]
+    aFromFit = fitExpo(currentT,c1,c2)
+    aDotFromFit = fitExpoDeriv(currentT,c1,c2)
+    s = str( t4[i] ) + " " + str( y4[i] ) + " " + str( aFromFit ) + " " + str( aDotFromFit ) + "\n"
+    f4.write(s)
+f4.close()
+
+k=popt5[0]
+t0=popt5[1]
+n=popt5[2]
+for i in range( len(t5) ):
+    currentT = t5[i]
+    aFromFit = fitPoly(currentT,k,t0,n)
+    aDotFromFit = fitPolyDeriv(currentT,k,t0,n)
+    s = str( t5[i] ) + " " + str( y5[i] ) + " " + str( aFromFit ) + " " + str( aDotFromFit ) + "\n"
+    f5.write(s)
+f5.close()
+
+for i in range( len(t6) ):
+    s = str( t6[i] ) + " " + str( y6[i] ) + "\n"
+    f6.write(s)
+f6.close()
+
+print "Done analyzing."
+
+
 
 # figure()
 # plot(timeall,y1all)
