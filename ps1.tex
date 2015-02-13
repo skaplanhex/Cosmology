@@ -1,10 +1,10 @@
-\documentclass[aps,reprint,prl]{revtex4-1}
+\documentclass[aps,reprint,prl,floatfix]{revtex4-1}
 \usepackage{graphicx}  % needed for figures
-\usepackage{dcolumn}   % needed for some tables
 \usepackage{bm}        % for math
-\usepackage{amssymb}   % for math
+\usepackage{amsmath,amssymb}   % for math
 \usepackage{url}
-\usepackage{hyperref}
+\usepackage{hyperref,float}
+\restylefloat{figure}
 %\usepackage{notoccite}
 
 \begin{document}
@@ -13,7 +13,7 @@
 \affiliation{Department of Physics and Astronomy, Rutgers, The State University of New Jersey, 136 Frelinghuysen Road, Piscataway, New Jersey 08854, USA}
 
 \begin{abstract}
-The Friedmann equations are very powerful tools in cosmology.  Given the densities $\rho$ of matter, radiation, and dark energy, one can solve the Friedmann equations to obtain the scale factor $a(t)$.  Once $a(t)$ is known, other quantities can be obtained such as the age of the universe in the model and the time evolution of the Hubble constant.  I explore the above using six cosmological models.
+The Friedmann equations are very powerful tools in cosmology.  Given the densities $\rho$ of matter, radiation, and dark energy, one can solve the Friedmann equations to obtain the scale factor $a(t)$, the measure of how much the universe has expanded at a given moment relative to the present time which, by convention, is assigned a scale factor of unity.  Once $a(t)$ is known, other quantities can be obtained such as the age of the universe in the model and the time evolution of the Hubble constant.  The above is explored using six cosmological models followed by a discussion of which models predict an 'end' of the universe and which predict an infinitely long expansion period.
 \end{abstract}
 
 \maketitle
@@ -59,6 +59,7 @@ Using the fact that $\rho_0=\Omega_0 \rho_{cr}$ and explicitly showing the $a$ d
 \begin{equation} \label{eq:friedmann}
 \left(\frac{\dot{a}}{a}\right)^2=H_0^2\left[ \frac{\Omega_{m,0}}{a^3}+\frac{\Omega_{r,0}}{a^4}+\frac{\Omega_{DE,0}}{a^{3(1+w)}} \right] -\frac{k}{a^2}
 \end{equation}
+\newpage
 This paper discusses the solution of equation \ref{eq:friedmann} in the following cases (if not specified, a quantity should be assumed to be equal to zero):
 \begin{itemize}
 \item $\Omega_{m,0}=1$ (Einstein-de Sitter Universe)
@@ -68,16 +69,38 @@ This paper discusses the solution of equation \ref{eq:friedmann} in the followin
 \item $\Omega_{m,0}=0.3,\Omega_{DE,0}=0.7,w=-2/3$ (Quintessence)
 \item $\Omega_{m,0}=0.3,\Omega_{DE,0}=0.7,w=-4/3$ (Phantom Energy)
 \end{itemize}
+Note that since recent measurements \cite{pdg} of $\Omega_{r,0}=2.47\cdot10^{-5}h^{-2}$, its contribution to the scale factor is negligible given the time scale considered.
 \section*{Method}
-To solve equation \ref{eq:friedmann} numerically, the \texttt{odeint} function from the \texttt{SciPy} library \cite{scipy} was used.  To fit the numerical solutions of $a(t)$ to functions, the \texttt{PyROOT} wrapper of the \texttt{ROOT} data analysis library \cite{ROOT} was used.  Using the fit for $a(t)$, one can use equation \ref{eq:hubble} to see the time evolution of the Hubble constant.
+To solve equation \ref{eq:friedmann} numerically and to fit the solutions, the the \texttt{SciPy} library \cite{scipy} was used.  In order to avoid divergences as $a\rightarrow0$, the value of $t$ was defined relative to the present.  The present day value of the scale factor was set to unity.  Were this not the case, since there is no explicit $t$ dependence in the Friedmann equation, the form of $a(t)$ would simply be shifted; however, the shape would remain the same.  A change in the setting of the scale factor today would not alter $H(t)$ in any way since any change to the scale factor would cancel.  To plot $a(t)$ and $H(t)$, the \texttt{PyROOT} wrapper of the \texttt{ROOT} data analysis library \cite{ROOT} was used.  Using the fit for $a(t)$, one can use equation \ref{eq:hubble} to visualize the time evolution of the Hubble constant.  By the definition of the scale factor, the age of the universe will be the value of $t$ for which $a(t) = 0$.
 \section*{Results}
-After solving equation \ref{eq:friedmann} numerically for each model of the universe, the following is the resultant plots of the scale factor $a(t)$
+After solving equation \ref{eq:friedmann} numerically for each model of the universe, the following are the resultant plots of the scale factor $a(t)$.
 
-\begin{figure}
-\includegraphics[width=0.4\textwidth]{ps1_plots/a_einstein}
-\caption{The time evolution of the scale factor $a(t)$ in an Einstein-de Sitter Universe}
+\begin{figure}[H]
+\includegraphics[width=0.5\textwidth]{ps1_plots/a1-6}
+\caption{The time evolution of the scale factor $a(t)$}
 \end{figure}
 
+Each plot was fit with the function $a(t)=k(t-t_0)^n$.  As mentioned above, the age of the universe will be the value of $t$ for which $a(t) = 0$.  This corresponds to the value of $t_0$ in the fit.\\
+
+\begin{figure}[H]
+\includegraphics[width=0.5\textwidth]{ps1_plots/h1-5}
+\caption{The time evolution of the Hubble paramter $H(t)$}
+\end{figure}
+\newpage
+\begin{table}[h]
+\begin{tabular}{c|c|c|c}
+Model                 & $k$                   & $t_0$ (Gyr)           & $n$                  \\
+\multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l|}{} & \multicolumn{1}{l}{} \\ \hline
+Einstein-de Sitter    & 0.2305                & 9.309                 & 0.6618               \\ \hline
+Closed                & 0.4179                & 7.908                 & 0.4349               \\ \hline
+Open                  & 0.0964                & 11.59                 & 0.9483               \\ \hline
+$\Lambda_{CDM}$       & 0.0003                & 13.41                 & 2.878                \\ \hline
+Quintessance          & 0.0254                & 12.61                 & 1.358               
+\end{tabular}
+\caption{Fit parameters for the cosmological models considered}
+\end{table}
+There are a number of interesting results to discuss here.  First, the closed universe model predicts a big crunch at $\sim$70 Gyr.  Of particular interest to the author is that the phantom energy model predicts a big rip at $\sim$32 Gyr.  As is described in \cite{Caldwell:2003vq}, the big rip would unbind our solar system on the order of months and destroy the earth on the order of minutes before the universe meets its fate.
+%\section*{}
 % \section*{The Einstein-de Sitter Universe}
 % %Find a way to cite http://www.nicadd.niu.edu/~bterzic/PHYS652/Lecture_05.pdf
 % Here, $\Omega_{m,0}=1$ since the universe is matter dominated, and $k=0$ because the universe is flat.  The Friedmann equation thus reduces to

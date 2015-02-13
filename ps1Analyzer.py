@@ -52,6 +52,9 @@ def debugY(t,y):
     semilogy()
     # loglog()
     show()
+def printParams(paramList):
+    print "k = %s\nt0 = %s\nn = %s"%( str(paramList[0]),str(paramList[1]),str(paramList[2]) )
+    print ""
 
 # first, run backward in time.
 
@@ -214,23 +217,26 @@ print "Now fitting the plots!"
 
 p0 = [1,9.7,0.66]
 popt1,pcov1 = curve_fit(fitPoly,t1,y1,p0)
+printParams(popt1)
 
 p0 = [0.5,9.7,0.5]
 popt2,pcov2 = curve_fit(fitPoly,t2,y2,p0)
+printParams(popt2)
 
 # parameters from a ROOT fit
 p0 = [0.0747717,13.708127540232468,1.]
 # p0 = [0.1,9.7,1.]
 popt3,pcov3 = curve_fit(fitPoly,t3,y3,p0)
+printParams(popt3)
 
-# fit for this func is exp( c1+(c2*t) )
-p0 = [0.0618829,0.0598859]
-popt4,pcov4 = curve_fit(fitExpo,t4,y4,p0)
+p0 = [5,14,3.]
+popt4,pcov4 = curve_fit(fitPoly,t4,y4,p0)
+printParams(popt4)
 
 p0 = [1.,17.,1.5]
 popt5,pcov5 = curve_fit(fitPoly,t5,y5,p0)
-
-debugY(t6,y6)
+printParams(popt5)
+# debugY(t6,y6)
 
 # p0 = [1.,19.,0.7]
 # popt6,pcov6 = curve_fit(fitPoly,t6,y6,p0)
@@ -281,12 +287,13 @@ for i in range( len(t3) ):
     f3.write(s)
 f3.close()
 
-c1 = popt4[0]
-c2 = popt4[1]
+k=popt4[0]
+t0=popt4[1]
+n=popt4[2]
 for i in range( len(t4) ):
     currentT = t4[i]
-    aFromFit = fitExpo(currentT,c1,c2)
-    aDotFromFit = fitExpoDeriv(currentT,c1,c2)
+    aFromFit = fitPoly(currentT,k,t0,n)
+    aDotFromFit = fitPolyDeriv(currentT,k,t0,n)
     s = str( t4[i] ) + " " + str( y4[i] ) + " " + str( aFromFit ) + " " + str( aDotFromFit ) + "\n"
     f4.write(s)
 f4.close()
