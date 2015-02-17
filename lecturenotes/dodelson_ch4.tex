@@ -1,0 +1,38 @@
+\documentclass{article}
+\usepackage{fullpage}
+\title{Notes on Dodelson Ch. 4}
+\author{Steven Kaplan}
+\date{February 17, 2015}
+\begin{document}
+\maketitle
+Comments on problem set 1:
+\begin{itemize}
+\item Regarding the closed universe, it halts when a=2!  Remember that $\dot{a}$ is equal to a square root, so there is a positive and a negative solution.  The positive solution will go from $a=0$ to $a=2$, but you need the negative solution to get from $a=2$ back to $a=0$ (to see the big crunch).
+\item Maybe have a conclusion section also
+\item Cite Dodelson and the sakai site (where the problem came from) \emph{i.e.} "we are following Dodelson ch. 3...".  The reader should be able to reproduce your work based upon your paper and your citations
+\item Proofread your work!  Eric {\bf will} see typos.
+\end{itemize}
+See figure 4.1 for a pictorial representation of the boltzmann equation.  As matter and energy move, the local metric is changed because of this.  Since the metric is changed, this changes how matter/energy moves.  $\longrightarrow$ coupled boltzmann einstein equations.
+\\ \\
+Unintegrated boltzmann equation is eqn 4.1.  We first consider the collisionless case, $C[f]=0$.  Note that phase space elements move due to the metric.  Take as an example a 1D harmonic oscillator with energy as given in 4.1.  The distribution function of the HO is given by equation 4.3.  Use 4.4 and 4.5 to get $dx/dt$ and $dp/dt$, plug this back into 4.3 (see 4.6).  $p/m$ tells you how fast the oscillator moves, and $\partial f/\partial p$ tells you how fast particles lose momentum.
+\\ \\
+Equilibrium: $\partial f/ \partial t=0$ achieved if $f(p,x)\rightarrow f(E)$ since E is conserved
+\\ \\
+Boltzmann equation for photons:
+\\ \\
+Start with equation 4.9 to see the metric.  The $\Psi$ describes perturbations to the metric; Newtonian potential.  $\Phi$ describes the perturbation to the spatial curvature.  4.9 reduces to the FRW metric when $\Psi$ and $\Phi$ both $=0$.
+\\ \\
+Skip to equation 4.32 (see Dodelson for the middle steps).  $-H$ tells you that the photon loses momentum to the expansion of the universe.  The $d\Phi/dt$ tells you that the photon loses energy if the potential well increases.  The $d\Psi/dx$ term tells you whether the gravitational redshift moving into or out of potential well.  Now, define $\Theta\equiv \frac{\delta T}{T}$.  This leads to equation 4.42, which is $df/dt$ to first order.  See 4.36 for the definition of $f^{(0)}$, it is a Bose-Einstein distribution with $\mu=0$.  The first two terms in the brackets are "free streaming" terms.  These are "anisotropies on increasingly small scales as the universe evolves".  The last two terms are the effects of gravity.  Note that all instances of $x$ are multipled by $a$ (\emph{i.e.} physical distance$=ax$).
+\\ \\
+Keep in mind that the above is all for the collisionless case.  Now let's consider the collision terms (compton scattering):
+\\ \\
+Compton scattering leads to a \emph{local} monopole (see figure 4.3).  There's also a dipole from the \emph{bulk} velocity of electrons.  The electrons and photons are tightly coupled, hence we call them a fluid (photon baryon fluid).  Now, reintroduce conformal time $\eta$ and define $\cdot \equiv d/d\eta$.  Then, fourier transform to get uncoupled ordinary differential equations (helpful!).  Still needs to be numerically solved, but much easier to work with.  Our fourier convention is given by 4.59.  Also define $\mu$ to be the cosine of the angle between the wavevector and the photon momentum (4.60).  Define $\tau$ as in 4.61 and 4.62, and we can get 4.63 (the boltzmann equation for photons).
+\\ \\
+Dodelson later goes on to derive the boltzmann equation for cold dark matter and for baryons.
+\\ \\
+Notes on the chapter summary:
+\\ \\
+For dark matter, $\delta(\vec{x},t)$ is the overdensity $\delta p/p$.  Once you fourier transform, get $\widetilde{\delta}(k,n)$ assuming isotropy so $\vec{k}\rightarrow k$.  For baryons, $\delta_b$ etc.  At the end, drop the twiddles.
+\\ \\
+The entire chapter in Dodelson serves to get us to the summary list.
+\end{document}
