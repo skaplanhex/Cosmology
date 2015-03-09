@@ -2,7 +2,7 @@
 \usepackage{graphicx}  % needed for figures
 \usepackage{dcolumn}   % needed for some tables
 \usepackage{bm}        % for math
-\usepackage{amssymb}   % for math
+\usepackage{amssymb,amsmath}   % for math
 \usepackage{url}
 \usepackage{hyperref}
 
@@ -12,13 +12,45 @@
 \affiliation{Department of Physics and Astronomy, Rutgers, The State University of New Jersey, 136 Frelinghuysen Road, Piscataway, New Jersey 08854, USA}
 
 \begin{abstract}
-Insert an abstract here. Some sort of summary of the theme of all the problems? Think about this.
 \end{abstract}
 
 \maketitle
+\nocite{*} % make the entire reference list even though the references haven't been cited
+\section*{Introduction}
+In the very early universe, the extremely dense and high temperature conditions made particle interactions very frequent.  As Dodelson \cite{Dodelson} describes it, the mean free path of a photon was around the size of an atom when the universe was one second old (compared to $\sim10^{28}$ cm today).  Initially, all of these particle interactions were in equilibrium, as the reaction rates were much larger than the rate of expansion of the universe.  If the equilibrium held throughout BBN, all of the primordial baryons would eventually end up in iron, as iron has the largest binding energy.  Since this clearly does not match up to our universe, we much have fallen out of equilibrium at some point.  Indeed, the universe quickly cooled to a point that equilibrium ceased to describe reality, and the reactions thus became non-reversible.  
+\\ \\
+ During Big Bang Nucleosynthesis (BBN), the universe's primordial supply of deuterium (D or $^2$H), $^3$He, $^4$He, and a trace amount of $^7$Li was created \cite{wiki:BBN}.  As we will see, the physics of BBN can be split into two parts.  At temperatures $T\gtrsim$ the binding energy of deuterium $B_D=2.22$ MeV,  the very small $\left(\sim5\cdot 10^{-10}\right)$ baryon-to-photon density $\eta_b$ inhibits the production of light nuclei.  Any nucleus created will be destroyed by a photon in the hot and dense 'photon soup'  Below this cutoff, the universe has expanded enough to decrease the mean free path of the photons to the point that nuclei can be formed.  Clearly, the cutoff point is a function of $\eta_b$ as this cutoff depends on when the photons are spread out enough due to the expansion of the universe (which, in turn, depends on how spread out they were while the universe was at a temperature larger than the cutoff).  This paper explores the development of the universe just before BBN through to just after it.  First I will develop the theory necessary for this exploration.  In the scenarios listed in Table 1, I will show the temperature evolution of the neutron abundance both in and out of equilibrium, point out what the abundance and mass fractions of neutrons are just before BBN and then the abundance and mass fractions of $^4$He after BBN.  Afterward will follow a discussion of the assumptions that were made in these calculations, implications of these results for later stages in the evolution of the universe, and whether or not the results beg the inclusion of the Anthropic Principle.
+\begin{table}[h]
+\begin{tabular}{c|c|c|c}
+Model                     & $m_n$ (MeV) & $m_p$ (MeV) & $\eta_b$         \\
+                          &             &             &                  \\ \hline
+Our Universe              & 939.57      & 938.27      & $5\cdot10^{-10}$ \\ \hline
+Mass Swap                 & 938.27      & 939.57      & $5\cdot10^{-10}$ \\ \hline
+Heavy Neutron             & 1879.14     & 938.27      & $5\cdot10^{-10}$ \\ \hline
+High Baryon Density       & 939.57      & 938.27      & $10^{-5}$        \\ \hline
+Ultra High Baryon Density & 939.57      & 938.27      & 1               
+\end{tabular}
+\caption{Summary of the five models of BBN explored in this paper.}
+\end{table}
+\section*{Development of the Theory}
+This section mainly follows \cite{Dodelson,NIU}.  Our first task, again, is to derive an expression for how the neutron abundance evolves with time (or equally, the decreasing temperature of the universe).  Starting with the Boltzmann equation applied to the following two reactions:
+\begin{align*}
+n+\nu_e&\leftrightarrow p+e^- \\
+n+e^+&\leftrightarrow p+\bar{\nu}_e
+\end{align*}
+neglecting the effects of quantum statistics and assuming that we are talking about a system with $T<E-\mu$:
+\begin{equation}
+a^{-3}\frac{d\left(n_1a^3\right)}{dt}=n_1^{(0)}n_2^{(0)}\left<\sigma v\right>\left\{\frac{n_3n_4}{n_3^{(0)}n_4^{(0)}}-\frac{n_1n_2}{n_1^{(0)}n_2^{(0)}}\right\} .
+\end{equation}
+One result that is immediately obvious is that equilibrium holds when
+\begin{equation}
+\frac{n_3n_4}{n_3^{(0)}n_4^{(0)}}=\frac{n_1n_2}{n_1^{(0)}n_2^{(0)}}
+\end{equation}
 % sources so far:
 % Dodelson
 % Bernstein paper (Cosmological helium production simplified, Reviews of Modern Physics 61.1, 1989)
 % http://ned.ipac.caltech.edu/level5/March06/Padmanabhan/Nabhan2.html
 % http://www.nicadd.niu.edu/~bterzic/PHYS652/Lecture_16.pdf (really lectures 14-16)
+\bibliographystyle{unsrt}
+\bibliography{ps2Sources}
 \end{document}
