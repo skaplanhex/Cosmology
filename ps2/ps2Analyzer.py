@@ -4,7 +4,7 @@ import numpy as np
 from scipy.integrate import odeint
 print "done."
 
-# gROOT.SetBatch()
+gROOT.SetBatch()
 
 # returns H(x=1) in units of 1/seconds
 def Hx1(Q):
@@ -15,7 +15,14 @@ def Hx1(Q):
 
 # Xn,eq as a function of temperature. It also depends on the difference between the neutron and proton masses!
 def Xneq(T,Q):
-    temp = np.exp( Q/T )
+    mn = 939.565378 #MeV
+    mp = 938.272046 #MeV
+    temp = ((mp/mn)**1.5)*np.exp( Q/T )
+    return 1./(1.+temp)
+def XneqCase3(T,Q):
+    mn = 2.*939.565378 #MeV
+    mp = 938.272046 #MeV
+    temp = ((mp/mn)**1.5)*np.exp( Q/T )
     return 1./(1.+temp)
 
 # Equation 3.27 in Dodelson. Xn is the ratio of neutrons to total nuclei. x \equiv Q/T where Q \equiv mn-mp
@@ -58,7 +65,7 @@ mp = 938.272046 #MeV
 Q = mn - mp
 
 Tstart = 2.
-Tend = 0.1
+Tend = 0.06
 temps = np.linspace(Tstart,Tend,1000)
 xs = Q/temps
 Xninit = Xneq(Tstart,Q) # choose the initial Xn to be the value of Xn,eq at the starting point of the numerical calculation
@@ -92,6 +99,10 @@ leg.AddEntry(geq1,"2X_{n,eq}","L")
 leg.Draw()
 
 c.SaveAs("plots/Xncomp_case1.pdf")
+f = open('plots/case1.txt','w')
+for i in range(len(temps)):
+    f.write("%e %e %e\n"%(temps[i],Xn_eq[i],Xn[i]))
+f.close()
 c.Clear()
 
 ########################################
@@ -121,11 +132,12 @@ c = TCanvas()
 g2.Draw("AL")
 geq2 = TGraph(len(temps),temps,Xn_eq)
 geq2.SetLineColor(kRed)
+# geq2.SetLineStyle(2)
 geq2.Draw("L")
 # c.SetLogx()
-# c.SetLogy()
-g2.GetXaxis().SetRangeUser(Tend,Tstart)
-g2.GetYaxis().SetRangeUser(0.0001,1.)
+c.SetLogy()
+g2.GetXaxis().SetRangeUser(1.48,Tstart)
+g2.GetYaxis().SetRangeUser(0.0001,1.32)
 
 leg = TLegend(.73,.32,.97,.53)
 leg.SetBorderSize(0)
@@ -140,7 +152,7 @@ leg.Draw()
 c.SaveAs("plots/Xncomp_case2.pdf")
 f = open('plots/case2.txt','w')
 for i in range(len(temps)):
-    f.write("%.5f %.5f %.5f\n"%(temps[i],Xn_eq[i],Xn[i]))
+    f.write("%e %e %e\n"%(temps[i],Xn_eq[i],Xn[i]))
 f.close()
 c.Clear()
 
@@ -154,13 +166,13 @@ mp = 938.272046 #MeV
 Q = mn - mp
 
 Tstart = 2.
-Tend = 0.1
+Tend = 0.06
 temps = np.linspace(Tstart,Tend,1000)
 xs = Q/temps
 Xninit = Xneq(Tstart,Q) # choose the initial Xn to be the value of Xn,eq at the starting point of the numerical calculation
 Xn = odeint(dXndxCase3,Xninit,xs)
 Xn = 2.*Xn
-Xn_eq = 2.*Xneq(temps,Q)
+Xn_eq = 2.*XneqCase3(temps,Q)
 
 g3 = TGraph(len(temps),temps,Xn)
 g3.SetTitle("")
@@ -190,8 +202,8 @@ leg.Draw()
 c.SaveAs("plots/Xncomp_case3.pdf")
 f = open('plots/case3.txt','w')
 for i in range(len(temps)):
-    f.write("%.5f %.5f %.5f\n"%(temps[i],Xn_eq[i],Xn[i]))
+    f.write("%e %e %e\n"%(temps[i],Xn_eq[i],Xn[i]))
 f.close()
 # c.Clear()
 
-raw_input("Enter to quit: ")
+# raw_input("Enter to quit: ")

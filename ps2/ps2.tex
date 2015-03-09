@@ -7,11 +7,12 @@
 \usepackage{hyperref}
 
 \begin{document}
-\title{Big Bang Nucleosynthesis}
+\title{An Exploration of Big Bang Nucleosynthesis}
 \author{Steven Kaplan}
 \affiliation{Department of Physics and Astronomy, Rutgers, The State University of New Jersey, 136 Frelinghuysen Road, Piscataway, New Jersey 08854, USA}
 
 \begin{abstract}
+I work through and develop some of the machinery of Big Bang Nucleosynthesis (BBN) to show what effect changing the proton mass, neutron mass, or the baryon-to-photon fraction has upon the neutron abundance before BBN and the $^4$He abundance after BBN.  Afterward, I discuss the implication of these changes upon later stages of the universe's development and whether or not the anthropic principle need be implied by the results.
 \end{abstract}
 
 \maketitle
@@ -24,33 +25,126 @@ In the very early universe, the extremely dense and high temperature conditions 
 \begin{tabular}{c|c|c|c}
 Model                     & $m_n$ (MeV) & $m_p$ (MeV) & $\eta_b$         \\
                           &             &             &                  \\ \hline
-Our Universe              & 939.57      & 938.27      & $5\cdot10^{-10}$ \\ \hline
-Mass Swap                 & 938.27      & 939.57      & $5\cdot10^{-10}$ \\ \hline
-Heavy Neutron             & 1879.14     & 938.27      & $5\cdot10^{-10}$ \\ \hline
-High Baryon Density       & 939.57      & 938.27      & $10^{-5}$        \\ \hline
-Ultra High Baryon Density & 939.57      & 938.27      & 1               
+Our Universe (OU)             & 939.57      & 938.27      & $5\cdot10^{-10}$ \\ \hline
+Mass Swap (MS)                 & 938.27      & 939.57      & $5\cdot10^{-10}$ \\ \hline
+Heavy Neutron (HN)            & 1879.14     & 938.27      & $5\cdot10^{-10}$ \\ \hline
+High Baryon Density (HBD)       & 939.57      & 938.27      & $10^{-5}$        \\ \hline
+Ultra High Baryon Density (UHBD) & 939.57      & 938.27      & 1               
 \end{tabular}
 \caption{Summary of the five models of BBN explored in this paper.}
 \end{table}
 \section*{Development of the Theory}
-This section mainly follows \cite{Dodelson,NIU}.  Our first task, again, is to derive an expression for how the neutron abundance evolves with time (or equally, the decreasing temperature of the universe).  Starting with the Boltzmann equation applied to the following two reactions:
-\begin{align*}
-n+\nu_e&\leftrightarrow p+e^- \\
-n+e^+&\leftrightarrow p+\bar{\nu}_e
-\end{align*}
-neglecting the effects of quantum statistics and assuming that we are talking about a system with $T<E-\mu$:
-\begin{equation}
+This section mainly follows \cite{Dodelson,NIU}.  Our first task, again, is to derive an expression for how the neutron abundance evolves with time (or equally, the decreasing temperature of the universe).  Starting with the Boltzmann equation applied to the following reaction:
+\begin{equation*}
+n+p\leftrightarrow D+\gamma
+\end{equation*}
+neglecting the effects of quantum statistics and assuming that we are talking about a system with $T\ll E-\mu$:
+\begin{equation} \label{eq:boltzmann}
 a^{-3}\frac{d\left(n_1a^3\right)}{dt}=n_1^{(0)}n_2^{(0)}\left<\sigma v\right>\left\{\frac{n_3n_4}{n_3^{(0)}n_4^{(0)}}-\frac{n_1n_2}{n_1^{(0)}n_2^{(0)}}\right\} .
 \end{equation}
-One result that is immediately obvious is that equilibrium holds when
+Here, $n_x$ is the number density of the $x^{th}$ particle in the reaction above (\emph{i.e.} $1+2\leftrightarrow 3+4$).  A superscript $(0)$ denotes the value at equilibrium.  $a$ is the scale factor, and $\left<\sigma v\right>$ is the thermally averaged cross section.  One result that is immediately obvious is that equilibrium holds when
 \begin{equation}
 \frac{n_3n_4}{n_3^{(0)}n_4^{(0)}}=\frac{n_1n_2}{n_1^{(0)}n_2^{(0)}}
 \end{equation}
-% sources so far:
-% Dodelson
-% Bernstein paper (Cosmological helium production simplified, Reviews of Modern Physics 61.1, 1989)
-% http://ned.ipac.caltech.edu/level5/March06/Padmanabhan/Nabhan2.html
-% http://www.nicadd.niu.edu/~bterzic/PHYS652/Lecture_16.pdf (really lectures 14-16)
+Applied to our case, and seeing that $n_\gamma=n_\gamma^{(0)}$
+\begin{equation}
+\frac{n_D}{n_n n_p}=\frac{n_D^{(0)}}{n_n^{(0)}n_p^{(0)}}
+\end{equation}
+Using equation (3.6) in \cite{Dodelson}, approximating $m_D\simeq2m_n\simeq2m_p$ (good for all models other than the Heavy Neutron model which will be discussed later), and using the fact that both the neutron and proton densities are proportional to the baryon density, we arrive at
+\begin{equation} \label{eq:dodelson317}
+\frac{n_D}{n_b}\simeq\eta_b\left(\frac{T}{m_p}\right)^{3/2}e^{B_D/T}
+\end{equation}
+From this relation we now see what was mentioned above regarding nucleosynthesis not occurring in our universe until temperatures comparable to the deuterium binding energy.  In the high $T$ regime, the exponential is killed by the small $\eta_b$.  Indeed, as will be discussed later on, for models like HBD and UHBD, BBN happens at a higher temperature due to the much higher $\eta_b$ in those models.  In the Heavy Neutron case, we cannot use the approximation of $m_D\simeq2m_n\simeq2m_p$.  This results in the following relation between $\eta_B$ and $T_{nuc}$:
+\begin{equation}
+\frac{n_D}{n_b}\simeq \eta_b\left(\frac{2m_D T}{m_nm_p}\right)^{3/2}e^{B_D/T}
+\end{equation}
+Again using equation (3.6) in \cite{Dodelson}, we see that
+\begin{equation}
+\frac{n_p^{(0)}}{n_n^{(0)}}=\left(\frac{m_p}{m_n}\right)^{3/2}e^{Q/T}
+\end{equation}
+Where $Q \equiv m_n-m_p=1.293$ MeV.  The factor of $\left(\frac{m_p}{m_n}\right)^{3/2}$ is very close to unity except in the Heavy Neutron model, so I keep this factor present for that case.  This relation tells us that if the universe were always in equilibrium, the neutron density would die off exponentially.  As argued above, we are not in equilibrium, so we will discuss the temperature evolution of the neutron density in that case.  We define
+\begin{equation*}
+X_n=\frac{n_n}{n_n+n_p}
+\end{equation*}
+In equilibrium, this means that
+\begin{equation} \label{eq:xneq}
+X_{n,EQ}=\frac{1}{1+\left(\frac{m_p}{m_n}\right)^{3/2}e^{Q/T}}
+\end{equation}
+To derive an out of equilibrium expression for $X_n$, start with equation \ref{eq:boltzmann} using the reaction $n+lepton\rightarrow p+lepton$ where the leptons can be any combination where conservation laws hold.  Assuming the leptons are in equilibrium, using the Friedmann equation and the fact that we are investigating an epoch within the radiation-dominated era, we end up with the following ordinary differential equation for $X_n$:
+\begin{multline} \label{eq:diffeq}
+\frac{dX_n}{dx}=\frac{x\lambda_{np}}{H(x=1)}\times \\ \times\left\{\left(\frac{m_n}{m_p}\right)^{3/2}e^{-x}-X_n\left(1+\left(\frac{m_n}{m_p}\right)^{3/2}e^{-x}\right)\right\}
+\end{multline}
+Here, 
+\begin{align*}
+x&\equiv Q/T \\
+H(x=1)&=\sqrt{\frac{4\pi^3GQ^4}{45}}\times\sqrt{10.75} \\
+\lambda_{np}&=\frac{255}{\tau_nx^5}(12+6x+x^2) .
+\end{align*}
+The form of the neutron-proton conversion rate $\lambda_{np}$ is discussed in \cite{Bernstein}.  Here, $\tau_n$ is the mean lifetime of the neutron.  Since $\tau_n=886.7$ seconds is comparable to the length of time BBN took to occur, it is not a huge effect; however, it is noticeable.  Using the Friedmann equation and the temperature dependence of $\rho$ discussed in \cite{Dodelson}, we see that
+\begin{equation} \label{eq:tT}
+t=132\;\mathrm{sec}\left(\frac{0.1\mathrm{MeV}}{T}\right)^2
+\end{equation}
+The neutrons decay by a factor of $e^{-t/\tau_n}$ with $t$ given as in equation \ref{eq:tT} above.  We approximate the production of light elements by assuming that it occurs instantaneously at a certain temperature $T_{nuc}$.    Finally, taking the log of equation \ref{eq:dodelson317} and assuming that $n_D/n_b$ is of order unity (again, good for all models except the Heavy Neutron Model):
+\begin{equation}
+\ln(\eta_b)+\frac{3}{2}\ln(T_{nuc}/m_p)\sim-\frac{B_D}{T_{nuc}}
+\end{equation}
+Assuming that all of the neutrons existing at the onset of BBN are converted to $^4$He, the abundance of $^4$He right after BBN should be
+\begin{equation} \label{eq:abund}
+X_4=\frac{1}{2}X_n(T_{nuc})
+\end{equation}
+In terms of mass, this is
+\begin{equation} \label{eq:mass}
+X_{4,mass}=2X_n(T_{nuc})
+\end{equation}
+\section*{Methodology and Assumptions}
+The temperature evolution of the non-equilibrium neutron abundance of the universe in each model is solved by integrating equation \ref{eq:diffeq} numerically via the \texttt{SciPy} \cite{scipy} library.  This numerical solution and the exact solution given by equation \ref{eq:xneq} were plotted using the \texttt{ROOT} data analysis framework \cite{ROOT}.  Some cross checking was done using \texttt{Maple 18} \cite{maple}.
+\\ \\
+There are a number of assumptions made in this analysis.  Apart from the simplifications mentioned above like sometimes using $m_D\simeq m_p$, we assume some quantities do not vary in time in the neighborhood of BBN even though they do.  One example of this is the effective number of degrees of freedom $g_*$.  We also do not take into account quantum statistics and the electron mass.  It turns out that these assumptions aren't very limiting.  Figure 3.2 of \cite{Dodelson} shows that the numerical solution we obtained for the neutron abundance matches that of the solution when these factors are taken into account until $\sim0.1$ MeV.  In determining the $^4$He abundance, we assumed that $n_D/n_b=1$.  This assumption is again does not make us lose accuracy as the $^4$He abundance obtained numerically is in very good agreement with that of Olive \cite{olive}.
+\section*{Results}
+For each model, the results of integrating equation \ref{eq:diffeq} are shown in Figures 1-3.  Note that while temperature increases from left to right in these plots, the plots should be read from right to left to see how the neutron abundances change with time.  Tables 2 and 3 summarize the $T_{nuc}$ values, neutron abundances and Helium-4 abundance and mass fractions.
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{plots/Xncomp_case1}
+\caption{The temperature evolution of the neutron abundances $X_n$ and $X_{n,eq}$ in our universe and in the HBD/UHBD models until the onset of BBN.}
+\end{figure}
+Figure 1 shows that the neutrons are in equilibrium until a bit above 1 MeV.  The abundance freezes out at around 0.15.  As is shown in Table 1, there is a slight correction to this to get the value just before BBN due to neutron decay.
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{plots/Xncomp_case2}
+\caption{The temperature evolution of the neutron abundances $X_n$ and $X_{n,eq}$ in the Mass Swap model.  The author unfortunately had a great deal of trouble fitting both plots in the same window for comparison.}
+\end{figure}
+\\ \\
+Figure 2 shows the quite large effect of simply swapping the neutron and proton masses.
+\begin{figure}[h]
+\includegraphics[width=0.5\textwidth]{plots/Xncomp_case3}
+\caption{The temperature evolution of the neutron abundances $X_n$ and $X_{n,eq}$ in the Heavy Neutron model.  The author also unfortunately ran into plotting issues here.  For reference, the abundances in this case are quite low $(<1\cdot10^{-200})$.  The plot scans tens of orders of magnitude below that level.}
+\end{figure}
+\begin{table}[h]
+\begin{tabular}{c|c|c|c|}
+Model                     & $T_{nuc}$ & Decay factor & $X_n(T_{nuc})$        \\
+                          &           &              &                       \\ \hline
+Our Universe              & 0.06      & 0.68         & 0.102                 \\ \hline
+Mass Swap                 & 0.06      & 0.68         & 0                     \\ \hline
+Heavy Neutron             & 0.07      & 0.74         & $3.68\cdot 10^{-205}$ \\ \hline
+High Baryon Density       & 0.09      & 0.83         & 0.12                  \\ \hline
+Ultra High Baryon Density & 0.17      & 0.95         & 0.14                 
+\end{tabular}
+\caption{Summary of $T_{nuc}$ values, neutron decay factors, and neutron abundance fractions for each model.  The decay factor is given by $e^{-t/\tau_n}$ with $t$ given by equation \ref{eq:tT}.  $X_n(T_{nuc})$ comes from the solution of equation \ref{eq:diffeq}.}
+\end{table}
+\begin{table}[h]
+\begin{tabular}{c|c|c}
+Model                     & $X_4$                 & $X_{4,mass}$          \\
+                          &                       &                       \\ \hline
+Our Universe              & 0.051                 & 0.204                 \\ \hline
+Mass Swap                 & 0                     & 0                     \\ \hline
+Heavy Neutron             & $1.84\cdot 10^{-205}$ & $7.36\cdot 10^{-205}$ \\ \hline
+High Baryon Density       & 0.06                  & 0.24                  \\ \hline
+Ultra High Baryon Density & 0.07                  & 0.28                 
+\end{tabular}
+\caption{Summary of $^4$He abundance and mass fractions for each model.  The values are given by equations \ref{eq:abund} and \ref{eq:mass}.}
+\end{table}
+\section*{Conclusions}
+It would seem that the Anthropic Principle alone rules out the Mass Swap and Heavy Neutron cases (not to mention that we know the proton and neutron masses).  The neutron abundance just before BBN is either zero or very close to it.  If that were the case, nuclei could not have formed (save for hydrogen during recombination).  In the HBD and UHBD models, there are more baryons per photon than in the other models.  While we saw (Table 3) that this did not have a huge impact upon the helium abundance, it would have a big effect upon later stages of the early universe.  We can think of increasing $\eta_b$ as increasing $n_b$ while keeping $n_\gamma$ constant.  This would, in essence, make recombination happen more quickly because the mean free path of photons then would be larger since their density is comparatively less.  It would seem that life still might be a possibility in these models.
+\\ \\ \\ \\ \\ \\ \\ \\ % get the bibliography all in one column
+
 \bibliographystyle{unsrt}
 \bibliography{ps2Sources}
 \end{document}
