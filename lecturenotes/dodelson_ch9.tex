@@ -1,0 +1,30 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage,amsmath,amssymb}
+\title{Notes on Dodelson Ch. 8}
+\author{Steven Kaplan}
+\date{March 10, 2015}
+\begin{document}
+\maketitle
+%PS3: Horizon problem - CMB is uniform.  Inflation solves this.  Why do perturbations exist at all.
+\noindent
+CMB Anisotropies (perturbations seen in different directions in the sky).  Earliest record of Big Bang that we can observe, and physics is rich/well behaved.
+\subsection*{\S8.1}
+Before recombination, we had a photon-baryon fluid that was tightly coupled.  After recombination, photons free stream (i.e. travel freely in straight lines (geodesic paths) ).  They are free streaming from the last scattering surface (LSS).  Look at figure 8.1.  This figure shows up to $\eta_*\equiv$ recombination for initial overdesities.  Photon-baryon perturbations don't grow $<\eta_*$ because of pressure - "acoustic oscillations".  Why $k^{3/2}$?  Makes dimensionless and equal amplitude.  $\Theta_0$ is the photon perturbations (local monopole).  $\Psi$ is the gravitational potential perturbations (affects photons via gravitational redshift).  It affects the photons as they leave the LSS via gravitational redshift.  What we observe is then $(\Theta_0+\Psi)$.  We don't expect photon perturbations to grow after recombination, so that's why CMB anisotropies are such good probes of the early universe!
+\\ \\
+Look at Figure 8.2.  $Y$ axis is plotting the same thing, except just at the moment of recombination $\eta_*$.  The figure shows baryonic effects: high $\Omega_b\;\rightarrow$ enhancement of odd peaks.  Low $\Omega_b\;\rightarrow$ photon damping by 4$^{th}$ peak due to diffusion.  Simplified version is forced harmonic oscillator (given by eqn (8.1)).  Know that $\Theta_0$ is just the monopole term, not the value today.  $c_s$ is the sound speed, $F$ is the forcing (\emph{i.e.} gravity).  Read the box on page 220 for a refresher on forced harmonic oscillators.  What happens if we increase our baryon fraction $\Omega_b$?  $c_s$ decreases (more baryons there are for photons to scatter off of, the more the photons slow down).  This spaces the peaks further apart, though it's a mild effect.  Odd peaks increase due to zero point shift (gravity $>$ pressure).
+\\ \\
+What causes this damping?  Photon diffusion!  Shown in Figure 8.3.  What is the length of the mean free path $\lambda_{MFP}$?  We need to know the cross section between an electron and photon (i.e. thompson XS).  Below we will not be setting $c=1$.
+$$\lambda_{MFP}=\frac{1}{n_e\sigma_T}$$
+Damping length
+$$\lambda_D=\lambda_{MFP}\sqrt{N}$$
+$$N=\frac{T_*}{t}=\frac{1/H(\eta_*)}{\lambda_{MFP}/c}=\frac{n_e\sigma_Tc}{H}$$
+This means that
+$$\lambda_D=\sqrt{\frac{c}{n_e\sigma_TH}}$$
+So if $\Omega_b$ decreases, $n_e$ decreases $\rightarrow$ $\lambda_{MFP}$ decreases $\rightarrow$ $\lambda_D$ increases.  See Figure 8.4.  $\theta$ is the angle on LSS.  Assuming $\Omega_k=0 (flatness):$
+$$\theta\simeq\frac{k^{-1}}{\eta_0-\eta_*}\simeq\frac{1}{\ell}$$
+Since $\eta_* \ll \eta_0$, hence $\ell \simeq k\eta_0$.  We need to add effects of early and late integrated sachs-wolfe (ISW) effect and secondary anisotropies (including gravitational lensing) to predict observed CMB $C_\ell$
+\subsection*{\S8.2: Large Scale Anisotropies}
+Equation (8.5).  This equation assumes that $\eta_* \gg \eta_{eq}$, but it's not true.  This causes the early ISW.
+\\ \\
+\underline{Observed} anisotropy is equation (8.6).  In terms of the DM over density is (8.8).  Factor of 1/6 is critical!  See last paragraph in \S8.2.  Need about 6 times 10 to the -5 to match $P(k)$ observed today
+\end{document}
